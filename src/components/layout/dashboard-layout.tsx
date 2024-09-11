@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Sidebar } from "@/components/atoms/sidebar/sidebar";
 import { useState } from "react";
+import { Navbar } from "../atoms/header/navbar";
 
 const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -15,6 +16,7 @@ const Dashboardlayout = ({ children }: { children: React.ReactNode }) => {
           isOpen === false ? "lg:ml-[90px]" : "lg:ml-72"
         )}
       >
+        <Navbar title="Dashboard" />
         {children}
       </main>
       <footer
