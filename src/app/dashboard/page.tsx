@@ -7,17 +7,17 @@ import Dashboardlayout from "@/components/layout/dashboard-layout";
 const page = () => {
   return (
     <Dashboardlayout>
-      <nav className="flex  justify-between items-center border-2 border-black">
+      <nav className="flex  justify-between items-center">
         {/* 1 */}
         <ul className="flex ml-[10px]">
           <li className="flex items-center ">
-            <Grip size={18} />
-            <p className="ml-1 text-[15px] font-semibold text-[#1C1D22]">
+            <Grip size={18} className="dark:text-[#fff]"/>
+            <p className="ml-1 text-[15px] font-semibold text-[#1C1D22] dark:text-[#fff]">
               Board view
             </p>
           </li>
-          <li className="ml-[20px] flex items-center text-[12px] font-semibold text-[#c2c2c2]">
-            <CirclePlus size={20} strokeWidth={0.75} />
+          <li className="ml-[20px] flex items-center text-[12px] font-semibold text-[#c2c2c2] dark:text-[#ffffff]">
+            <CirclePlus size={20} strokeWidth={0.75}  />
             <p className="ml-1 text-[15px] font-semibold text-[#c2c2c2]">
               Add view
             </p>
@@ -25,7 +25,7 @@ const page = () => {
         </ul>
         {/* 2 */}
         <ul className="flex items-center">
-          <li className="text-[15px] font-semibold text-[#1C1D22]">Filter</li>
+          <li className="text-[15px] font-semibold text-[#1C1D22] dark:text-[#fff]">Filter</li>
           <li className="ml-[20px] text-[15px] font-semibold text-[#c2c2c2]">
             Sort
           </li>
@@ -43,7 +43,7 @@ const page = () => {
           <ul className="flex justify-between py-2 px-4">
             <li className="font-black text-[#a2a3a4]"> To Do (4)</li>
             <li className="font-black flex">
-              <CirclePlus size={20} strokeWidth={0.75} /> <p>Add New Task</p>
+              <CirclePlus size={20} strokeWidth={0.75} className="dark:text-[#fff]" /> <p className="dark:text-[#fff]">Add New Task</p>
             </li>
           </ul>
         </nav>
