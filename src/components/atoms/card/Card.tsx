@@ -10,21 +10,21 @@ const Card = () => {
     {/* 1 */}
     <ul className='flex justify-between pb-2'>
         <li>
-            <p className='text-[14px] font-black'>Design system update</p>
-            <p className='text-[12px]'>Dribbble marketing</p>
+            <p className='text-[14px] font-black dark:text-[#fff]'>Design system update</p>
+            <p className='text-[12px] dark:text-[#fff]'>Dribbble marketing</p>
         </li>
-        <li className='ml-[20px] flex justify-center items-center w-[26px] h-[26px] rounded-[50%] bg-[#ffffff] border-[.5px] border-[#c2c2c2]'>
-            <Ellipsis size={20} strokeWidth={0.75} />
+        <li className='ml-[20px] flex justify-center items-center w-[26px] h-[26px] rounded-[50%] bg-[#ffffff] border-[.5px] border-[#c2c2c2] dark:text-[#fff]'>
+            <Ellipsis size={20} strokeWidth={0.75} className='dark:text-[black]' />
         </li>
     </ul>
     {/* 2 */}
     <ul className='flex justify-between items-center pb-1'>
         <li className='flex items-center w-[76px] h-[23px] '>
-            <Logs />
-            <p className='text-[14px] ml-1'>Progress</p>
+            <Logs className='dark:text-[#fff]' />
+            <p className='text-[14px] ml-1 dark:text-[#fff]'>Progress</p>
         </li>
         <li>
-            <p className='text-[14px] font-bold '>7/10</p>
+            <p className='text-[14px] font-bold dark:text-[#fff] '>7/10</p>
         </li>
 
     </ul>
