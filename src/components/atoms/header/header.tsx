@@ -1,12 +1,7 @@
-import { ThemeToggle } from '@/components/layout/theme-toggle'
-import React from 'react'
+import React from "react";
 
 const Header = () => {
-  return (
-    <div>
-        <ThemeToggle />
-    </div>
-  )
-}
+  return <div className="w-full ">Header</div>;
+};
 
 export default Header;
