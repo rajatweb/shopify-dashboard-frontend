@@ -1,8 +1,3 @@
-import Header from "@/components/atoms/header/header";
-
 export default function Home() {
-  return <>
-      <Header />
-    </>
-  ;
+  return <div className="w-full bg-white flex flex-row h-fit "></div>;
 }
