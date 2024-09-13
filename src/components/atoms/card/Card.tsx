@@ -1,10 +1,28 @@
 import React from "react";
+import { useSortable } from "@dnd-kit/sortable";
 import { Button } from "../../ui/button";
 import { Ellipsis, Logs, Paperclip, MessageSquareText } from "lucide-react";
+import { type } from "os";
 
-const Card = () => {
-  return (
-    <div className=" w-[320px] h-[178px] border-2 rounded-[12px] mx-auto px-[12px] py-[12px] mb-3 ">
+type CardProp ={
+  num:number;
+  id:String;
+}
+
+const Card = ({num,id}:CardProp) => {
+  const { attributes, listeners, setNodeRef, transform } = useSortable({
+    id,
+  });
+  return (      
+    <div
+    ref={setNodeRef}
+    style={{
+      transform: transform
+        ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+        : undefined,
+    }}
+    {...attributes}
+    {...listeners} className=" w-[320px] h-[178px] border-2 rounded-[12px] mx-auto px-[12px] py-[12px] mb-3 ">
       {/* 1 */}
       <ul className="flex justify-between pb-2">
         <li>
@@ -28,12 +46,12 @@ const Card = () => {
           <p className="text-[14px] ml-1 dark:text-[#fff]">Progress</p>
         </li>
         <li>
-          <p className="text-[14px] font-bold dark:text-[#fff] ">7/10</p>
+          <p className="text-[14px] font-bold dark:text-[#fff] ">{num}/10</p>
         </li>
       </ul>
       {/* 3 */}
       <ul className="w-[100%] bg-[#ededed] h-1 mt-2">
-        <li className="w-[70%] bg-[#ffa048] h-1 "></li>
+        <li className=" bg-[#ffa048] h-1 " style={{width:`${num/10 *100}%`}}></li>
       </ul>
       {/* 4 */}
       <ul className="flex justify-between py-4 ">

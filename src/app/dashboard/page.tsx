@@ -1,10 +1,14 @@
 "use client";
-
+import React, { useState } from "react";
 import CardWrapper from "@/components/atoms/card/Card-wrapper";
 import Card from "@/components/atoms/card/Card";
 import { Button } from "@/components/ui/button";
 import { Grip, CirclePlus, Ellipsis } from "lucide-react";
 import Dashboardlayout from "@/components/layout/dashboard-layout";
+import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core"
+import {SortableContext } from "@dnd-kit/sortable"
+
+
 import {
   Dialog,
   DialogContent,
@@ -16,8 +20,30 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { eventNames } from "process";
+
 
 const page = () => {
+  const [cards, setCards] = useState([
+    { id: "Card-1", num: 1 },
+    { id: "Card-2", num: 2 },
+    { id: "Card-3", num: 3 },]
+  );
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    if (active.id !== over.id) {
+      setCards((cards) => {
+        const activeIndex = cards.findIndex((card) => card.id === active.id);
+        const overIndex = cards.findIndex((card) => card.id === over.id);
+        const newCards = [...cards];
+        newCards.splice(overIndex, 0, newCards.splice(activeIndex, 1)[0]);
+        return newCards;
+      });
+    }
+  };
+
+
+
   return (
     <Dashboardlayout>
       <nav className="flex  justify-between items-center">
@@ -92,65 +118,80 @@ const page = () => {
           </Button>
         </ul>
       </nav>
-      <CardWrapper>
-        {/* nav */}
-        <nav className=" text-[14px]">
-          <div className="flex justify-between items-center py-2 px-4">
-            <button className="font-black text-[#a2a3a4]"> To Do (4)</button>
-            <button className="font-black flex ">
-              <Dialog>
-                <CirclePlus
-                  size={20}
-                  strokeWidth={0.75}
-                  className="dark:text-[#fff]"
-                />
-                <DialogTrigger asChild>
-                  <span className="dark:text-[#fff]">Add New Task</span>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader className="flex items-center">
-                    <DialogTitle className="text-[20px] font-bold text-[#1C1D22] dark:text-[#fff]">
-                      ADD NEW TASKS
-                    </DialogTitle>
-                    <DialogDescription>
-                      {`Make changes to your tasks list here. Click save when you're
+      <div className="flex ">
+
+        <CardWrapper>
+          {/* nav */}
+          <nav className=" text-[14px]">
+            <div className="flex justify-between items-center py-2 px-4">
+              <button className="font-black text-[#a2a3a4]"> To Do (4)</button>
+              <button className="font-black flex ">
+                <Dialog>
+                  <CirclePlus
+                    size={20}
+                    strokeWidth={0.75}
+                    className="dark:text-[#fff]"
+                  />
+                  <DialogTrigger asChild>
+                    <span className="dark:text-[#fff]">Add New Task</span>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader className="flex items-center">
+                      <DialogTitle className="text-[20px] font-bold text-[#1C1D22] dark:text-[#fff]">
+                        ADD NEW TASKS
+                      </DialogTitle>
+                      <DialogDescription>
+                        {`Make changes to your tasks list here. Click save when you're
                     done.`}
-                    </DialogDescription>
-                  </DialogHeader>
-                  <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="name" className="text-right">
-                        Name
-                      </Label>
-                      <Input
-                        id="name"
-                        defaultValue="Pedro Duarte"
-                        className="col-span-3"
-                      />
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Name
+                        </Label>
+                        <Input
+                          id="name"
+                          defaultValue="Pedro Duarte"
+                          className="col-span-3"
+                        />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="username" className="text-right">
+                          Username
+                        </Label>
+                        <Input
+                          id="username"
+                          defaultValue="@peduarte"
+                          className="col-span-3"
+                        />
+                      </div>
                     </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="username" className="text-right">
-                        Username
-                      </Label>
-                      <Input
-                        id="username"
-                        defaultValue="@peduarte"
-                        className="col-span-3"
-                      />
-                    </div>
-                  </div>
-                  <DialogFooter className="flex ">
-                    <Button type="submit">Save changes</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </button>
-          </div>
-        </nav>
-        {/* card */}
-        <Card />
-        <Card />
-      </CardWrapper>
+                    <DialogFooter className="flex ">
+                      <Button type="submit">Save changes</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </button>
+            </div>
+          </nav>
+          {/* card */}
+          <DndContext onDragEnd={handleDragEnd}>
+            <SortableContext items={cards}>
+            {cards.map((card) => (
+                <Card
+                  key={card.id}
+                  num={card.num}
+                  id={card.id}
+                />
+            ))}
+            </SortableContext>
+          </DndContext>
+
+        </CardWrapper>
+
+      </div>
+
     </Dashboardlayout>
   );
 };
