@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import CardWrapper from "@/components/atoms/card/Card-wrapper";
-import Card from "@/components/atoms/card/Card";
+import React from "react";
+// import CardWrapper from "@/components/atoms/card/Card-wrapper";
+// import Card from "@/components/atoms/card/Card";
 import { Button } from "@/components/ui/button";
 import { Grip, CirclePlus, Ellipsis } from "lucide-react";
 import Dashboardlayout from "@/components/layout/dashboard-layout";
-import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core"
-import {SortableContext } from "@dnd-kit/sortable"
+// import { DndContext, useDraggable, useDroppable } from "@dnd-kit/core"
+// import {SortableContext } from "@dnd-kit/sortable"
 
 
 import {
@@ -20,27 +20,28 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { eventNames } from "process";
+
+import MultipleContainers from "@/components/dnd/multiple-containers";
 
 
 const page = () => {
-  const [cards, setCards] = useState([
-    { id: "Card-1", num: 1 },
-    { id: "Card-2", num: 2 },
-    { id: "Card-3", num: 3 },]
-  );
-  const handleDragEnd = (event) => {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      setCards((cards) => {
-        const activeIndex = cards.findIndex((card) => card.id === active.id);
-        const overIndex = cards.findIndex((card) => card.id === over.id);
-        const newCards = [...cards];
-        newCards.splice(overIndex, 0, newCards.splice(activeIndex, 1)[0]);
-        return newCards;
-      });
-    }
-  };
+  // const [cards, setCards] = useState([
+  //   { id: "Card-1", num: 1 },
+  //   { id: "Card-2", num: 2 },
+  //   { id: "Card-3", num: 3 },]
+  // );
+  // const handleDragEnd = (event) => {
+  //   const { active, over } = event;
+  //   if (active.id !== over.id) {
+  //     setCards((cards) => {
+  //       const activeIndex = cards.findIndex((card) => card.id === active.id);
+  //       const overIndex = cards.findIndex((card) => card.id === over.id);
+  //       const newCards = [...cards];
+  //       newCards.splice(overIndex, 0, newCards.splice(activeIndex, 1)[0]);
+  //       return newCards;
+  //     });
+  //   }
+  // };
 
 
 
@@ -119,9 +120,8 @@ const page = () => {
         </ul>
       </nav>
       <div className="flex ">
-
-        <CardWrapper>
-          {/* nav */}
+        <MultipleContainers />
+        {/* <CardWrapper>
           <nav className=" text-[14px]">
             <div className="flex justify-between items-center py-2 px-4">
               <button className="font-black text-[#a2a3a4]"> To Do (4)</button>
@@ -175,7 +175,6 @@ const page = () => {
               </button>
             </div>
           </nav>
-          {/* card */}
           <DndContext onDragEnd={handleDragEnd}>
             <SortableContext items={cards}>
             {cards.map((card) => (
@@ -188,7 +187,7 @@ const page = () => {
             </SortableContext>
           </DndContext>
 
-        </CardWrapper>
+        </CardWrapper> */}
 
       </div>
 
