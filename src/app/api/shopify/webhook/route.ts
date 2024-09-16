@@ -36,36 +36,3 @@ export async function POST(req: Request) {
 
   return NextResponse.json({ message: 'Webhook received' });
 }
-
-// import crypto from 'crypto';
-// import { NextResponse } from 'next/server';
-
-// async function verifyWebhook(req: Request) {
-//   const hmacHeader = req.headers.get('x-shopify-hmac-sha256');
-//   const body = await req.json(); // assuming JSON payload
-
-//   const generatedHash = crypto
-//     .createHmac('sha256', process.env.SHOPIFY_API_SECRET!)
-//     .update(body, 'utf8')
-//     .digest('base64');
-
-//   return generatedHash === hmacHeader;
-// }
-
-// export async function POST(req: Request) {
-//   const isValid = verifyWebhook(req);
-
-//   if (!isValid) {
-//     return NextResponse.json({ error: 'Invalid webhook' }, { status: 401 });
-//   }
-
-//   const data = await req.json();
-//   const topic = req.headers.get('x-shopify-topic');
-//   const shop = req.headers.get('x-shopify-shop-domain');
-
-//   console.log(`Received ${topic} webhook from ${shop}`, data);
-
-//   // Process webhook data (e.g., handle app uninstall, order creation, etc.)
-  
-//   return NextResponse.json({ message: 'Webhook received' });
-// }
