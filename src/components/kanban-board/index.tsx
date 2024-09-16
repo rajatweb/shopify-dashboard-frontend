@@ -45,7 +45,7 @@ const KanbanBoard = () => {
       columnId,
       content: `Task ${tasks.length + 1}`
     };
-    setTasks([...tasks, newTask]);
+    setTasks([newTask,...tasks]);
   }
 
   const deleteColumn = (id: Id) => {
@@ -145,8 +145,7 @@ const KanbanBoard = () => {
 
   return (
     <div
-      className='m-auto flex min-h-screen w-full items-start overflow-x-auto overflow-y-hidden mt-5 px-[40px]'
-    >
+      className='m-auto flex min-h-screen w-full items-start overflow-x-auto overflow-y-hidden mt-5 px-[40px]'>
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}
@@ -187,7 +186,7 @@ const KanbanBoard = () => {
 
       </DndContext>
 
-      <Button onClick={createNewColumn}><CirclePlus size={18} className='mr-2' /> Add Column </Button>
+      <Button onClick={createNewColumn}><CirclePlus size={18} className='mr-2'/> Add Column </Button>
     </div>
   )
 }

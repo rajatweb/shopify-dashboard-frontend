@@ -6,6 +6,12 @@ import { CSS } from '@dnd-kit/utilities';
 import { useMemo, useState } from 'react';
 import { Input } from '../ui/input';
 import TaskCard from './task-card';
+import {
+    Tooltip,
+    TooltipTrigger,
+    TooltipContent,
+    TooltipProvider,
+} from "@/components/ui/tooltip";
 
 
 interface Props {
@@ -48,20 +54,19 @@ const ColumnContainer = (props: Props) => {
         return <div
             ref={setNodeRef}
             style={style}
-            className='bg-gray-200 opacity-40 border-red-400 border-2 w-[350px] h-[350px] max-h-[500px] rounded-md flex flex-col mx-1'></div>
+            className='bg-gray-200 opacity-40 border-red-400 border-2 w-[350px]  rounded-md flex flex-col mx-1'></div>
     }
     return (
         <div
             ref={setNodeRef}
             style={style}
-            className='bg-gray-200 w-[350px] h-[350px] max-h-[500px] rounded-md flex flex-col mx-1'>
+            className='bg-gray-200 w-[350px] h-[80vh] rounded-md flex flex-col mx-1 dark:bg-black'>
             <div
                 {...attributes}
                 {...listeners}
-                onClick={() => setEditMode(true)}
-                className='bg-slate-50 text-md h-[60px] cursor-grab rounded-md rounder-b-none p-3 font-bold border-black-50 border-4 flex justify-between items-center'>
-                <div className='flex gap'>
-                    <div className='flex justify-center items-center bg-gray-100 px-2 py-1 text-sm rounded-full'> 0</div>
+                className='bg-slate-50 text-md h-[60px] cursor-grab rounded-md rounder-b-none p-3 font-bold border-black-50 border-4 flex justify-between items-center  dark:bg-black'>
+                <div className='flex gap ' onClick={() => setEditMode(true)}>
+                    <div className='flex justify-center items-center bg-gray-100 px-2 py-1 text-sm rounded-full dark:bg-black'></div>
                     {!editMode && column.title}
                     {editMode &&
                         <Input
@@ -76,31 +81,52 @@ const ColumnContainer = (props: Props) => {
                         />
                     }
                 </div>
-                <div className=''>
-                    <Button
-                        onClick={() => { deleteColumn(column.id) }}
-                        variant={'ghost'}
-                    >
-                        <Trash2 size={18} strokeWidth={1} />
-                    </Button>
+                <div className='flex items-center justify-between w-[50px]'>
+                    <TooltipProvider>
+                        <Tooltip delayDuration={10}>
+                            <TooltipTrigger asChild>
+                                <a
+                                    onClick={() => createTask(column.id)}
+                                >
+                                    <CirclePlus size={18} />
+                                </a>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                setting
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                        <Tooltip delayDuration={10}>
+                            <TooltipTrigger asChild>
+                                <a
+                                    onClick={() => { deleteColumn(column.id) }}
+                                    
+                                >
+                                    <Trash2 size={18} strokeWidth={1} />
+                                </a>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                Delete
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                 </div>
             </div>
+
+
             <div className='flex flex-grow flex-col gap-4 p-2 overflow-x-hidden overflow-y-auto'>
                 <SortableContext items={tasksIds}>
-                {tasks.map(task => (
-                    <TaskCard 
-                        key={task.id} 
-                        task={task} 
-                        deleteTask={deleteTask}    
-                    />
-                ))}
+                    {tasks.map(task => (
+                        <TaskCard
+                            key={task.id}
+                            task={task}
+                            deleteTask={deleteTask}
+                        />
+                    ))}
                 </SortableContext>
             </div>
-            <Button
-                size={"sm"}
-                className='flex gap-2 items-centers border-2 rounded-md'
-                onClick={() => createTask(column.id)}
-            ><CirclePlus size={14} /> Add Task</Button>
         </div>
     )
 }
