@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${exo_2.className} antialiased`}>
+      <body className={`${exo_2.className} antialiased`} suppressHydrationWarning={true}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextTopLoader showSpinner={false} />
           {children}

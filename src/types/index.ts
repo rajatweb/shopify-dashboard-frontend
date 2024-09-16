@@ -10,3 +10,14 @@ export type Task = {
     columnId: Id,
     content: string;
 }
+
+// types/shopify.ts
+export interface ShopifyAccessTokenResponse {
+    access_token: string;
+    scope: string;
+}
+
+export interface ShopifyWebhookEvent {
+    topic: string;
+    shop_domain: string;
+}
