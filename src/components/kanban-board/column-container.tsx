@@ -92,7 +92,7 @@ const ColumnContainer = (props: Props) => {
                                 </a>
                             </TooltipTrigger>
                             <TooltipContent>
-                                setting
+                                Add New Task
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
