@@ -3,6 +3,7 @@ import { Exo_2 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import NextTopLoader from "nextjs-toploader";
+import StoreProvider from "@/store/StoreProvider";
 
 const exo_2 = Exo_2({
   weight: "400",
@@ -22,10 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${exo_2.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NextTopLoader showSpinner={false} />
-          {children}
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <NextTopLoader showSpinner={false} />
+            {children}
+          </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );
