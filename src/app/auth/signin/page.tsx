@@ -9,7 +9,7 @@ export default function SignInPage() {
   const callbackUrl = searchParams.get('callbackUrl') || '/';
 
   useEffect(() => {
-    signIn('github', { callbackUrl });
+    signIn('google', { callbackUrl });
   }, [callbackUrl]);
 
   return (
