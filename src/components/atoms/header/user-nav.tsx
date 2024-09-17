@@ -26,7 +26,7 @@ import { useSearchParams } from "next/navigation";
 export function UserNav() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/';
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [isOpen,setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);

@@ -5,7 +5,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import NextTopLoader from "nextjs-toploader";
 import StoreProvider from "@/store/StoreProvider";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 import { getServerSession } from "next-auth";
 import AuthProvider from "@/components/layout/auth-provider";
 
