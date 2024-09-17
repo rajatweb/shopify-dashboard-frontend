@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import Dashboardlayout from "@/components/layout/dashboard-layout";
+
 import KanbanBoard from "@/components/kanban-board";
 import { useSession, signIn } from 'next-auth/react';
 
@@ -16,12 +16,13 @@ const Dashboard = () => {
     signIn(); // Redirect to sign in
     return <div>Redirecting...</div>;
   }
+
   return (
-    <Dashboardlayout>
+    <>
       <h1>Welcome {session.user?.name}!</h1>
       <p>Email: {session.user?.email}</p>
       <KanbanBoard />
-    </Dashboardlayout>
+    </>
   );
 };
 
