@@ -10,11 +10,14 @@ export default function SignInPage() {
 
   useEffect(() => {
     signIn('google', { callbackUrl });
+    signIn('github', { callbackUrl });  
   }, [callbackUrl]);
 
   return (
     <div>
-      <h1>Redirecting to GitHub...</h1>
+      <h1>Redirecting to signin... 
+      (Signed in with {token.provider === 'github' ? 'GitHub' : 'Google'})
+      </h1>
     </div>
   );
 }
