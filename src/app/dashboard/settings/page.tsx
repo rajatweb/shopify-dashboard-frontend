@@ -1,5 +1,4 @@
 "use client";
-
 // pages/settings.tsx
 
 import { useState } from "react";

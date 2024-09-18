@@ -6,6 +6,7 @@ import { Modal } from "@/components/ui/modal";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import {
   Tooltip,
   TooltipContent,
@@ -38,13 +39,13 @@ export function UserNav() {
   const handleGithubSignIn = () => {
     signIn('github', { callbackUrl });
   };
-
+  const userInitials = session?.user?.name;
+  const initials = userInitials?.split(' ').map((part) => part[0].toUpperCase()).join('');
   return <>
     <div>
       { //Check if message failed
         (session)
           ? <div>
-
             <DropdownMenu>
               <TooltipProvider disableHoverableContent>
                 <Tooltip delayDuration={100}>
@@ -55,8 +56,8 @@ export function UserNav() {
                         className="relative h-8 w-8 rounded-full"
                       >
                         <Avatar className="h-8 w-8">
-                          <AvatarImage src="#" alt="Avatar" />
-                          <AvatarFallback className="bg-transparent">JD</AvatarFallback>
+                          <AvatarImage  src={session.user?.image ?? ""} alt="Avatar" />
+                          <AvatarFallback className="bg-transparent">{initials}</AvatarFallback>
                         </Avatar>
                       </Button>
                     </DropdownMenuTrigger>
@@ -68,9 +69,9 @@ export function UserNav() {
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">John Doe</p>
+                    <p className="text-sm font-medium leading-none">{session.user?.name}</p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      johndoe@example.com
+                      {session.user?.email}
                     </p>
                   </div>
                 </DropdownMenuLabel>
@@ -83,7 +84,7 @@ export function UserNav() {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="hover:cursor-pointer" asChild >
-                    <Link href="/dashboard" className="flex items-center" >
+                    <Link href="/account" className="flex items-center" >
                       <User className="w-4 h-4 mr-3 text-muted-foreground" />
                       Account
                     </Link>
@@ -103,8 +104,8 @@ export function UserNav() {
             {isOpen && (
               <Modal title={"SignUp"} description={"SignUp by GOOGLE OR GITHUB"} isOpen={true} onClose={handleClose}>
                 <div className="flex flex-col">
-                <Button className="mb-2"  onClick={handleGithubSignIn} >Google</Button>
-                <Button onClick={handleGoogleSignIn}>Github</Button>
+                <Button className="mb-2"  onClick={handleGoogleSignIn} >Google</Button>
+                <Button onClick={handleGithubSignIn}>Github</Button>
                 </div>
               </Modal>
               )}
