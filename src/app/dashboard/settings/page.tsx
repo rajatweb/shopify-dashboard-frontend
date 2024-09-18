@@ -4,14 +4,14 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"; // Updated import
-import { AppBreadcrumb } from "@/components/atoms/breadcrumb";
+import AppBreadcrumb from "@/components/atoms/breadcrumb/AppBreadcrumb";
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState("account");
 
   return (
     <div className="mx-auto p-4">
-      <AppBreadcrumb />
+      <AppBreadcrumb pathname="/dashboard/settings" />
       <h1 className="text-2xl font-bold mb-6">Settings</h1>
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="mb-4">

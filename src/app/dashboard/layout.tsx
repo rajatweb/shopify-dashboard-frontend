@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Navbar } from "@/components/atoms/header/navbar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   return (
     <>
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
